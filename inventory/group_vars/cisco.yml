@@ -1,0 +1,13 @@
+ansible_user: ansible
+# Refence the varibale vault file
+ansible_ssh_password: ansible
+#ansible_connection: network_cli
+#ansible_network_os: cisco.ios.ios
+
+# Increase timeout to 1 minute (default is 30s)
+#ansible_command_timeout: 60
+
+ansible_connection: network_cli
+ansible_network_os: cisco.ios.ios
+ansible_become: yes
+ansible_become_method: enable
