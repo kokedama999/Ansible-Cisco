@@ -15,10 +15,18 @@
           Automation with Webhook + ngrock & GNS3 + Cisco
           Tested by 19th Feb 2026 ver2 + added IOU_R
           ---------------------------------------
-#    - name: Configure Loopback 100 
-#      cisco.ios.ios_config:
-#        lines:
- #         - description Configured by Ansible ---
-#          - ip address 192.168.100.1 255.255.255.255
-#          - no shutdown
- #       parents: interface Loopback100
+    - name: Configure Loopback 100 
+      cisco.ios.ios_config:
+        lines:
+          - description Configured by Ansible ---
+          - ip address 192.168.100.1 255.255.255.255
+          - no shutdown
+        parents: interface Loopback100
+
+    - name: Configure Loopback 101 
+      cisco.ios.ios_config:
+        lines:
+          - description Configured by Ansible ---
+          - ip address 192.168.101.1 255.255.255.255
+          - no shutdown
+        parents: interface Loopback101
