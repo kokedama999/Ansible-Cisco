@@ -15,7 +15,6 @@
           Automation with Webhook + ngrock & GNS3 + Cisco
           Tested by 19th Feb 2026 ver2 + added IOU_R
           ---------------------------------------
-#        state: present
 #    - name: Configure Loopback 100 
 #      cisco.ios.ios_config:
 #        lines:
