@@ -1,0 +1,41 @@
+---
+#R2
+- name: Configure Cisco Routers
+  hosts: cisco
+  connection: network_cli
+  gather_facts: no
+
+  tasks:
+    - name: Configure MOTD Banner
+      cisco.ios.ios_banner:
+        banner: motd
+        text: |
+          ---------------------------------------
+          WARNING: Authorized Access Only for G3nIu5
+          Managed by Ansible & Jenkins with GitHub
+          Automation with Webhook + ngrock & GNS3 + Cisco
+          Tested by 19th Feb 2026 ver2 + added IOU_R
+          ---------------------------------------
+    - name: Configure Loopback 100 
+      cisco.ios.ios_config:
+        lines:
+          - description Configured by Ansible ---
+          - ip address 192.168.200.1 255.255.255.255
+          - no shutdown
+        parents: interface Loopback100
+
+    - name: Configure Loopback 101 
+      cisco.ios.ios_config:
+        lines:
+          - description Configured by Ansible ---
+          - ip address 192.168.201.1 255.255.255.255
+          - no shutdown
+        parents: interface Loopback101
+
+    - name: Configure Loopback 102
+      cisco.ios.ios_config:
+        lines:
+          - description Configured by Ansible ---
+          - ip address 192.168.202.1 255.255.255.255
+          - no shutdown
+        parents: interface Loopback102
