@@ -1,7 +1,6 @@
 ---
-#R2
-- name: Configure Cisco Routers
-  hosts: cisco
+- name: Configure R2
+  hosts: R2
   connection: network_cli
   gather_facts: no
 
@@ -13,29 +12,46 @@
           ---------------------------------------
           WARNING: Authorized Access Only for G3nIu5
           Managed by Ansible & Jenkins with GitHub
-          Automation with Webhook + ngrock & GNS3 + Cisco
+          Automation with Webhook + ngrok & GNS3 + Cisco
           Tested by 19th Feb 2026 ver2 + added IOU_R
           ---------------------------------------
-    - name: Configure Loopback 100 
+
+    - name: Configure Loopback100
       cisco.ios.ios_config:
-        lines:
-          - description Configured by Ansible ---
-          - ip address 192.168.200.1 255.255.255.255
-          - no shutdown
         parents: interface Loopback100
-
-    - name: Configure Loopback 101 
-      cisco.ios.ios_config:
         lines:
           - description Configured by Ansible ---
-          - ip address 192.168.201.1 255.255.255.255
+          - ip address 192.168.210.1 255.255.255.255
           - no shutdown
+
+    - name: Configure Loopback101
+      cisco.ios.ios_config:
         parents: interface Loopback101
-
-    - name: Configure Loopback 102
-      cisco.ios.ios_config:
         lines:
           - description Configured by Ansible ---
-          - ip address 192.168.202.1 255.255.255.255
+          - ip address 192.168.211.1 255.255.255.255
           - no shutdown
+
+    - name: Configure Loopback102
+      cisco.ios.ios_config:
         parents: interface Loopback102
+        lines:
+          - description Configured by Ansible ---
+          - ip address 192.168.212.1 255.255.255.255
+          - no shutdown
+
+    - name: Configure Ethernet0/1 towards R1
+      cisco.ios.ios_config:
+        parents: interface Ethernet0/1
+        lines:
+          - description Link to R1
+          - ip address 12.12.12.2 255.255.255.240
+          - ip ospf 1 area 0
+          - no shutdown
+
+    - name: Configure OSPF process on R2
+      cisco.ios.ios_config:
+        parents: router ospf 1
+        lines:
+          - router-id 2.2.2.2
+          - redistribute connected subnets
